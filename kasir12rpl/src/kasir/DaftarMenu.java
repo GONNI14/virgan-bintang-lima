@@ -3,19 +3,48 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package kasir;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
  * @author user
  */
 public class DaftarMenu extends javax.swing.JPanel {
+    
+    private String selectedKodeMenu = null;
+    private DefaultTableModel tableModel;
 
     /**
      * Creates new form DaftarMenu
      */
     public DaftarMenu() {
         initComponents();
+        tableModel = (DefaultTableModel) tblDataMenu.getModel();
+        
+        // 2. Load Data Awal
+        loadTable();
+        
+        // 3. Tambahkan Action Listeners ke komponen
+        btnBaru.addActionListener(e -> clearForm());
+        btnSimpan.addActionListener(e -> btnSimpanAction());
+        bntHapus.addActionListener(e -> btnHapusAction()); // Nama variabel Anda: bntHapus
+
+        // Listener untuk saat baris tabel diklik
+        tblDataMenu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                tabelMenuMouseClicked(evt);
+            }
+        });
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,26 +57,77 @@ public class DaftarMenu extends javax.swing.JPanel {
 
         panelMenu = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDataMenu = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtHarga = new javax.swing.JTextField();
+        txtStok = new javax.swing.JTextField();
+        txtNamaMenu = new javax.swing.JTextField();
+        cmbKategori = new javax.swing.JComboBox<>();
+        btnSimpan = new javax.swing.JButton();
+        bntHapus = new javax.swing.JButton();
+        btnBaru = new javax.swing.JButton();
 
         panelMenu.setBackground(new java.awt.Color(255, 255, 255));
         panelMenu.setPreferredSize(new java.awt.Dimension(1660, 920));
         panelMenu.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDataMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nama Menu", "Harga", "Kategori", "Stok"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tblDataMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDataMenuMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblDataMenu);
 
-        panelMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, 170));
+        panelMenu.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 160, 890, 470));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Kategori:");
+        panelMenu.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setText("Stok:");
+        panelMenu.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setText("Nama Menu:");
+        panelMenu.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setText("Harga:");
+        panelMenu.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, -1, -1));
+        panelMenu.add(txtHarga, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, 190, 50));
+        panelMenu.add(txtStok, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 190, 50));
+        panelMenu.add(txtNamaMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 190, 50));
+
+        cmbKategori.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "makanan", "minuman", " " }));
+        panelMenu.add(cmbKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 190, 50));
+
+        btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSimpan.setText("SIMPAN");
+        panelMenu.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 570, 160, 60));
+
+        bntHapus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        bntHapus.setText("HAPUS");
+        panelMenu.add(bntHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 570, 160, 60));
+
+        btnBaru.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnBaru.setText("BATAL");
+        panelMenu.add(btnBaru, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 570, 180, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,10 +145,172 @@ public class DaftarMenu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblDataMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDataMenuMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblDataMenuMouseClicked
+public void loadTable() {
+        // Hapus semua baris data yang ada
+        tableModel.setRowCount(0);
+        
+        try (Connection conn = Koneksi.getConnection();
+             Statement stmt = conn.createStatement();
+             // Query sesuai skema DB Anda: kodemenu, namamenu, harga, kategori, stok
+             ResultSet rs = stmt.executeQuery("SELECT kodemenu, namamenu, harga, kategori, stok FROM menu ORDER BY kodemenu ASC")) {
+
+            while (rs.next()) {
+                tableModel.addRow(new Object[]{
+                    rs.getString("kodemenu"),
+                    rs.getString("namamenu"),
+                    rs.getInt("harga"),
+                    rs.getString("kategori"),
+                    rs.getInt("stok")
+                });
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat data menu: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+        clearForm(); // Bersihkan form setelah memuat tabel
+    }
+
+private void btnSimpanAction() {
+        try {
+            String namaMenu = txtNamaMenu.getText();
+            int harga = Integer.parseInt(txtHarga.getText());
+            int stok = Integer.parseInt(txtStok.getText());
+            // Nilai kategori dari ComboBox sudah dalam format huruf kecil (sesuai ENUM PostgreSQL)
+            String kategori = cmbKategori.getSelectedItem().toString(); 
+
+            // 1. Validasi Input
+            if (namaMenu.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Nama Menu tidak boleh kosong!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Connection conn = Koneksi.getConnection();
+            
+            if (selectedKodeMenu != null && !selectedKodeMenu.isEmpty()) {
+                // --- LOGIKA UPDATE (EDIT) ---
+                String sql = "UPDATE menu SET namamenu = ?, harga = ?, stok = ?, kategori = ?::kategori_enum WHERE kodemenu = ?";
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1, namaMenu);
+                pst.setInt(2, harga);
+                pst.setInt(3, stok);
+                pst.setString(4, kategori);
+                pst.setString(5, selectedKodeMenu);
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data menu berhasil DIEDIT!");
+            } else {
+                // --- LOGIKA INSERT (BARU) ---
+                String newKode = generateNewKode(conn);
+                
+                String sql = "INSERT INTO menu (kodemenu, namamenu, harga, stok, kategori) VALUES (?, ?, ?, ?, ?::kategori_enum)";
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1, newKode);
+                pst.setString(2, namaMenu);
+                pst.setInt(3, harga);
+                pst.setInt(4, stok);
+                pst.setString(5, kategori);
+
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data menu baru berhasil DISIMPAN!");
+            }
+            
+            loadTable(); // Muat ulang data untuk refresh tabel
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Harga dan Stok harus berupa angka yang valid!", "Kesalahan Input", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan database saat Simpan/Edit: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+private void btnHapusAction() {
+        if (selectedKodeMenu == null) {
+            JOptionPane.showMessageDialog(this, "Pilih menu yang ingin dihapus dari tabel.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int confirm = JOptionPane.showConfirmDialog(this, 
+                "Yakin ingin menghapus menu " + txtNamaMenu.getText() + "?", 
+                "Konfirmasi Hapus", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            try (Connection conn = Koneksi.getConnection()) {
+                String sql = "DELETE FROM menu WHERE kodemenu = ?";
+                PreparedStatement pst = conn.prepareStatement(sql);
+                pst.setString(1, selectedKodeMenu);
+                
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Menu berhasil dihapus!");
+                
+                loadTable(); // Muat ulang data
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Gagal menghapus data: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+private void tabelMenuMouseClicked(MouseEvent evt) {                                     
+         int row = tblDataMenu.getSelectedRow();
+         if (row != -1) {
+             // 1. Set variabel global untuk operasi Edit/Hapus
+             selectedKodeMenu = tblDataMenu.getValueAt(row, 0).toString(); 
+             
+             // 2. Tampilkan data ke Form
+             txtNamaMenu.setText(tblDataMenu.getValueAt(row, 1).toString());
+             txtHarga.setText(tblDataMenu.getValueAt(row, 2).toString());
+             txtStok.setText(tblDataMenu.getValueAt(row, 4).toString());
+             
+             // 3. Atur Kategori (nilai sudah sesuai dengan ENUM PostgreSQL)
+             String kategoriDb = tblDataMenu.getValueAt(row, 3).toString(); 
+             cmbKategori.setSelectedItem(kategoriDb);
+         }
+    }
+    
+    /**
+     * Menghasilkan kode menu baru (misal M001, M002, dst).
+     */
+    private String generateNewKode(Connection conn) throws SQLException {
+        String sqlKode = "SELECT kodemenu FROM menu ORDER BY kodemenu DESC LIMIT 1";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sqlKode);
+
+        String newKode = "M001";
+        if (rs.next()) {
+            String lastKode = rs.getString("kodemenu");
+            // Ambil angka dari kode (setelah huruf M), lalu tambahkan 1
+            int nomor = Integer.parseInt(lastKode.substring(1)) + 1;
+            // Format ulang menjadi M001, M002, dst. (M%03d berarti 3 digit angka)
+            newKode = String.format("M%03d", nomor);
+        }
+        return newKode;
+    }
+    
+    private void clearForm() {
+        selectedKodeMenu = null;
+        txtNamaMenu.setText("");
+        txtHarga.setText("");
+        txtStok.setText("");
+        cmbKategori.setSelectedIndex(0);
+        tblDataMenu.clearSelection();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntHapus;
+    private javax.swing.JButton btnBaru;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JComboBox<String> cmbKategori;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panelMenu;
+    private javax.swing.JTable tblDataMenu;
+    private javax.swing.JTextField txtHarga;
+    private javax.swing.JTextField txtNamaMenu;
+    private javax.swing.JTextField txtStok;
     // End of variables declaration//GEN-END:variables
 }

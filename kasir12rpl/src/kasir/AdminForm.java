@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package kasir;
+import java.awt.CardLayout;
+import kasir.DaftarMenu; 
+import kasir.DaftarUser;
+import kasir.LaporanTransaksi;
 
 /**
  *
@@ -15,8 +19,38 @@ public class AdminForm extends javax.swing.JFrame {
      */
     public AdminForm() {
         initComponents();
+        setupPanelUtama();
     }
+    private void setupPanelUtama() {
+    // 1. Dapatkan CardLayout. Jika belum di-set di initComponents, set di sini:
+    panelUtama.setLayout(new CardLayout());
+    
+    // 2. Inisialisasi Panel-Panel Konten
+    // Anda harus membuat kelas JPanel kosong untuk Beranda
+    berandaPanel = new javax.swing.JPanel();
+    berandaPanel.setBackground(new java.awt.Color(204, 255, 255)); // Contoh background untuk Beranda
+    
+    // Pastikan kelas DaftarMenu, DaftarUser, LaporanTransaks ada dan extend JPanel
+    daftarMenuPanel = new DaftarMenu(); 
+    daftarUserPanel = new DaftarUser();
+    laporanTransaksiPanel = new LaporanTransaksi(); 
 
+    // 3. Tambahkan Panel-Panel ke panelUtama
+    // String kedua adalah "Nama Kartu" yang akan digunakan untuk mengganti/menampilkan
+    panelUtama.add(berandaPanel, "Beranda");
+    panelUtama.add(daftarMenuPanel, "DaftarMenu");
+    panelUtama.add(daftarUserPanel, "DaftarUser");
+    panelUtama.add(laporanTransaksiPanel, "LaporanTransaksi");
+    
+    // Opsional: Tampilkan panel Beranda saat pertama kali dibuka
+    CardLayout cl = (CardLayout)(panelUtama.getLayout());
+    cl.show(panelUtama, "Beranda");
+}
+    
+private javax.swing.JPanel berandaPanel;
+private DaftarMenu daftarMenuPanel;
+private DaftarUser daftarUserPanel;
+private LaporanTransaksi laporanTransaksiPanel;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,18 +144,26 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void btnLaporanTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaporanTransaksiActionPerformed
         // TODO add your handling code here:
+        CardLayout cl = (CardLayout)(panelUtama.getLayout());
+    cl.show(panelUtama, "LaporanTransaksi");
     }//GEN-LAST:event_btnLaporanTransaksiActionPerformed
 
     private void bntBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBerandaActionPerformed
         // TODO add your handling code here:
+        CardLayout cl = (CardLayout)(panelUtama.getLayout());
+    cl.show(panelUtama, "Beranda");
     }//GEN-LAST:event_bntBerandaActionPerformed
 
     private void btnDaftarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarMenuActionPerformed
         // TODO add your handling code here:
+        CardLayout cl = (CardLayout)(panelUtama.getLayout());
+    cl.show(panelUtama, "DaftarMenu");
     }//GEN-LAST:event_btnDaftarMenuActionPerformed
 
     private void btnDaftarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarUserActionPerformed
         // TODO add your handling code here:
+        CardLayout cl = (CardLayout)(panelUtama.getLayout());
+    cl.show(panelUtama, "DaftarUser");
     }//GEN-LAST:event_btnDaftarUserActionPerformed
 
     /**

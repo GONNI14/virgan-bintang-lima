@@ -77,8 +77,6 @@ private void openMenuForm() {
     private void initComponents() {
 
         panelUtama = new javax.swing.JPanel();
-        panelDetail = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtMember = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -138,36 +136,6 @@ private void openMenuForm() {
         panelUtama.setBackground(new java.awt.Color(255, 255, 255));
         panelUtama.setPreferredSize(new java.awt.Dimension(1920, 1080));
         panelUtama.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        panelDetail.setBackground(new java.awt.Color(204, 204, 204));
-
-        javax.swing.GroupLayout panelDetailLayout = new javax.swing.GroupLayout(panelDetail);
-        panelDetail.setLayout(panelDetailLayout);
-        panelDetailLayout.setHorizontalGroup(
-            panelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelDetailLayout.setVerticalGroup(
-            panelDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        panelUtama.add(panelDetail, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 70, 350, 610));
-
-        jPanel3.setBackground(new java.awt.Color(204, 102, 0));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        panelUtama.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1440, 20, 350, 50));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Tunai");
@@ -900,12 +868,10 @@ private void handleDeleteKasir() {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private com.toedter.calendar.JDateChooser jdc;
-    private javax.swing.JPanel panelDetail;
     private javax.swing.JPanel panelTabelKasir;
     private javax.swing.JPanel panelUtama;
     private javax.swing.JTable tblKasir;

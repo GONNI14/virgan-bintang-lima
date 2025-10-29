@@ -3,18 +3,58 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package kasir;
+import java.sql.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
  * @author user
  */
 public class DaftarUser extends javax.swing.JPanel {
+    
 
     /**
      * Creates new form DaftarUser
      */
     public DaftarUser() {
         initComponents();
+        loadTable();
+    }
+    private DefaultTableModel tableModel;
+    public void loadTable() {
+tableModel = (DefaultTableModel) tblDataUser.getModel();        tableModel.setColumnCount(0);
+        tableModel.setRowCount(0);
+        
+        tableModel.addColumn("ID Pegawai");
+        tableModel.addColumn("Nama");
+        tableModel.addColumn("Username");
+        tableModel.addColumn("Role");
+        tableModel.addColumn("Alamat");
+        tableModel.addColumn("Telp");
+        // Tambahkan kolom lain jika ingin ditampilkan
+
+        try (Connection conn = Koneksi.getConnection();
+             Statement stmt = conn.createStatement();
+             // Query sesuai skema DB tabel 'pegawai'
+             ResultSet rs = stmt.executeQuery("SELECT idpelayan, namapelayan, username, role, alamatpelayan, telppelayan FROM pegawai ORDER BY idpelayan ASC")) {
+
+            while (rs.next()) {
+                tableModel.addRow(new Object[]{
+                    rs.getString("idpelayan"),
+                    rs.getString("namapelayan"),
+                    rs.getString("username"),
+                    rs.getString("role"),
+                    rs.getString("alamatpelayan"),
+                    rs.getString("telppelayan")
+                });
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Gagal memuat data user/pegawai: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -27,10 +67,27 @@ public class DaftarUser extends javax.swing.JPanel {
     private void initComponents() {
 
         panelUser = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDataUser = new javax.swing.JTable();
 
         panelUser.setBackground(new java.awt.Color(255, 255, 255));
         panelUser.setPreferredSize(new java.awt.Dimension(1660, 920));
         panelUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblDataUser.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblDataUser);
+
+        panelUser.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 1560, 840));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -50,6 +107,8 @@ public class DaftarUser extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelUser;
+    private javax.swing.JTable tblDataUser;
     // End of variables declaration//GEN-END:variables
 }
