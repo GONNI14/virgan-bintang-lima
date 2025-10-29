@@ -27,10 +27,27 @@ public class LaporanTransaksi extends javax.swing.JPanel {
     private void initComponents() {
 
         panelLaporan = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblTransaksi = new javax.swing.JTable();
 
         panelLaporan.setBackground(new java.awt.Color(255, 255, 255));
         panelLaporan.setPreferredSize(new java.awt.Dimension(1660, 920));
         panelLaporan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblTransaksi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblTransaksi);
+
+        panelLaporan.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 1620, 870));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -50,6 +67,8 @@ public class LaporanTransaksi extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelLaporan;
+    private javax.swing.JTable tblTransaksi;
     // End of variables declaration//GEN-END:variables
 }
