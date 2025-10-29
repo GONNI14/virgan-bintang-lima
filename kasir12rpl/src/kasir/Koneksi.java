@@ -13,7 +13,7 @@ public class Koneksi {
             if (conn == null || conn.isClosed()) {
                 String url = "jdbc:postgresql://localhost:5432/restoran"; 
                 String user = "postgres";
-                String password = "1234";
+                String password = "12345678";
 
                 conn = DriverManager.getConnection(url, user, password);
                 System.out.println("✅ Koneksi PostgreSQL berhasil!");

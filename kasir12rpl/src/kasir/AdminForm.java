@@ -26,21 +26,103 @@ public class AdminForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        panelNavbar = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        panelSidebar = new javax.swing.JPanel();
+        btnLaporanTransaksi = new javax.swing.JButton();
+        bntBeranda = new javax.swing.JButton();
+        btnDaftarMenu = new javax.swing.JButton();
+        btnDaftarUser = new javax.swing.JButton();
+        panelUtama = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1058, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        panelNavbar.setBackground(new java.awt.Color(0, 255, 255));
+        panelNavbar.setPreferredSize(new java.awt.Dimension(1920, 100));
+        panelNavbar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setText("DASHBOARD ADMIN");
+        panelNavbar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
+
+        getContentPane().add(panelNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 140));
+
+        panelSidebar.setBackground(new java.awt.Color(0, 102, 255));
+        panelSidebar.setPreferredSize(new java.awt.Dimension(100, 980));
+        panelSidebar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnLaporanTransaksi.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLaporanTransaksi.setText("LAPORAN TRANSAKSI");
+        btnLaporanTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaporanTransaksiActionPerformed(evt);
+            }
+        });
+        panelSidebar.add(btnLaporanTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 210, 50));
+
+        bntBeranda.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        bntBeranda.setText("BERANDA");
+        bntBeranda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntBerandaActionPerformed(evt);
+            }
+        });
+        panelSidebar.add(bntBeranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 210, 50));
+
+        btnDaftarMenu.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnDaftarMenu.setText("DAFTAR MENU ");
+        btnDaftarMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDaftarMenuActionPerformed(evt);
+            }
+        });
+        panelSidebar.add(btnDaftarMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 210, 50));
+
+        btnDaftarUser.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnDaftarUser.setText("DAFTAR USER");
+        btnDaftarUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDaftarUserActionPerformed(evt);
+            }
+        });
+        panelSidebar.add(btnDaftarUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 210, 50));
+
+        getContentPane().add(panelSidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 230, 950));
+
+        panelUtama.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panelUtamaLayout = new javax.swing.GroupLayout(panelUtama);
+        panelUtama.setLayout(panelUtamaLayout);
+        panelUtamaLayout.setHorizontalGroup(
+            panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1660, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 630, Short.MAX_VALUE)
+        panelUtamaLayout.setVerticalGroup(
+            panelUtamaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 920, Short.MAX_VALUE)
         );
+
+        getContentPane().add(panelUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 1660, 920));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLaporanTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaporanTransaksiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLaporanTransaksiActionPerformed
+
+    private void bntBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntBerandaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bntBerandaActionPerformed
+
+    private void btnDaftarMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDaftarMenuActionPerformed
+
+    private void btnDaftarUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDaftarUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDaftarUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +160,13 @@ public class AdminForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntBeranda;
+    private javax.swing.JButton btnDaftarMenu;
+    private javax.swing.JButton btnDaftarUser;
+    private javax.swing.JButton btnLaporanTransaksi;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel panelNavbar;
+    private javax.swing.JPanel panelSidebar;
+    private javax.swing.JPanel panelUtama;
     // End of variables declaration//GEN-END:variables
 }
